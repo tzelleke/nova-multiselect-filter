@@ -58,11 +58,19 @@
             this.selected = this.options.filter(option => {
                 return this.value.includes(option.value);
             });
-            console.log(this);
         },
         watch: {
+            value: function(v) {
+                this.selected = this.options.filter(option => {
+                  return this.value.includes(option.value);
+                });
+            },
             selected: function() {
-                this.$emit('change', this.selected.map(e => e.value));
+                if (this.selected.length) {
+                  this.$emit('change', this.selected.map(e => e.value));
+                } else {
+                  this.$emit('change', '');
+                }
             }
         }
     }

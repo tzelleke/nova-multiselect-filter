@@ -39,12 +39,14 @@
 
         methods: {
             handleChange(value) {
-                this.$store.commit(`${this.resourceName}/updateFilterState`, {
-                    filterClass: this.filterKey,
-                    value: value,
-                })
+                if (! _.isEqual(value, this.value)) {
+                    this.$store.commit(`${this.resourceName}/updateFilterState`, {
+                      filterClass: this.filterKey,
+                      value: value,
+                    })
 
-                this.$emit('change')
+                    this.$emit('change')
+                }
             },
         },
 
